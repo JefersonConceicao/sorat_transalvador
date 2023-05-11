@@ -34,6 +34,7 @@ class Grupo extends Model
      * @var array
      */
     protected $fillable = ['gru_id_csi', 'gru_nom_grupo', 'gru_url_padrao'];
+    public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

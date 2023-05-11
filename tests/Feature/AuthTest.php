@@ -63,7 +63,9 @@ class AuthTest extends TestCase
 
     public function test_usuario_logout(){
 
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'usu_num_senha' => '123456'
+        ]);
 
         $this
         ->actingAs($user)

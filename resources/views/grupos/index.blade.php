@@ -31,9 +31,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12 text-right mb-2">
-                            <button class="btn btn-sm btn-primary">
+                            <a class="btn btn-sm btn-primary" href="{{ route('grupos.create') }}">
                                 Novo <i class="fa fa-plus-square"> </i>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="table-responsive">

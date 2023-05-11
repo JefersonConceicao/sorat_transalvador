@@ -15,9 +15,11 @@
                     <label for="email" class="sr-only"> E-mail</label>
                     <input type="text" class="form-control" name="login" placeholder="Login" value="{{ old('login') }}">
                     
-                    @error('login')
-                        {{ $message }}
-                    @enderror
+                    <p class="text-danger"> 
+                        @error('login')
+                            {{ $message }}
+                        @enderror
+                    </p>
                 </div>
 
                 <div class="form-group @error('senha') has-error @enderror">
@@ -30,9 +32,12 @@
                         autocomplete="off"
                     >
 
-                    @error('senha')
-                        {{ $message }}
-                    @enderror
+                    <p class="text-danger">
+                        @error('senha')
+                            {{ $message }}
+                        @enderror
+
+                    </p>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Entrar" class="btn btn-primary btn-block" />

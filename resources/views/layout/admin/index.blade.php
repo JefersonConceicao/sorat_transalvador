@@ -1,5 +1,6 @@
 @extends('layout.main')
 @section('admin_assets')
+    <link href="{{ asset('clear_theme/css/bootstrap.css')}}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('clear_theme/css/app.css') }} "/>
     <link rel="stylesheet" href="{{ asset('clear_theme/vendors/swiper/css/swiper.min.css') }}">
     <link href="{{ asset('clear_theme/vendors/nvd3/css/nv.d3.min.css') }}"rel="stylesheet" type="text/css">

@@ -16,4 +16,6 @@ Route::group(['prefix' => 'auth'], function(){
 
 Route::group(['prefix' => 'grupos'], function(){
     Route::GET('/', [GrupoController::class, 'index'])->name('grupos.index');
+    Route::GET('/cadastro', [GrupoController::class, 'create'])->name('grupos.create');
+    Route::POST('/salvarGrupo', [GrupoController::class, 'store'])->name('grupos.store');
 });
