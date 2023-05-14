@@ -8,7 +8,7 @@
         </x-alert_error>
     @endif 
     
-    <form action="{{ route('grupos.store') }}" method="POST">
+    <form action="{{ route('grupos.update', $grupo->gru_id_gru) }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-xl-12">
@@ -21,7 +21,7 @@
                                     <input 
                                         type="text" class="form-control" 
                                         name="gru_nom_grupo"
-                                        value="{{ old('gru_nom_grupo') }}" 
+                                        value="{{ $grupo->gru_nom_grupo }}" 
                                     />
 
                                     <p class="text-danger">
@@ -38,7 +38,7 @@
                                         type="text" 
                                         class="form-control" 
                                         name="gru_url_padrao"
-                                        value="{{ old('gru_url_padrao') }}" 
+                                        value="{{ $grupo->gru_url_padrao }}"
                                     />
 
                                     <p class="text-danger">

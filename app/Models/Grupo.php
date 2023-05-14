@@ -17,15 +17,11 @@ use Illuminate\Database\Eloquent\Model;
 class Grupo extends Model
 {
     /**
-     * The table associated with the model.
-     * 
      * @var string
      */
     protected $table = 'gru_grupo';
 
     /**
-     * The primary key for the model.
-     * 
      * @var string
      */
     protected $primaryKey = 'gru_id_gru';
@@ -39,7 +35,7 @@ class Grupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function csiControleSistema()
+    public function controleSistema()
     {
         return $this->belongsTo('App\CsiControleSistema', 'gru_id_csi', 'csi_id_csi');
     }
@@ -47,7 +43,7 @@ class Grupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usuUsuarios()
+    public function usuarios()
     {
         return $this->hasMany('App\UsuUsuario', 'usu_id_gru', 'gru_id_gru');
     }
@@ -55,7 +51,7 @@ class Grupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function blaBloqueioAcessos()
+    public function bloqueioAcesso()
     {
         return $this->hasMany('App\BlaBloqueioAcesso', 'bla_id_gru', 'gru_id_gru');
     }
@@ -63,8 +59,24 @@ class Grupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function grmGrupoMenus()
+    public function grupoMenu()
     {
         return $this->hasMany('App\GrmGrupoMenu', 'grm_id_gru', 'gru_id_gru');
+    }
+
+    public function getGrupos(array $request = []){
+
+        $conditions = [];
+
+        if(isset($request['nom_grupo']) && !empty($request['nom_grupo'])){
+            $conditions[] = ['gru_nom_grupo', 'LIKE', '%'.$request['nom_grupo'].'%'];
+        }
+
+        return $this
+            ->where($conditions);
+    }
+
+    public static function optionsGrupos(){
+        return self::pluck('gru_nom_grupo', 'gru_id_gru')->toArray();
     }
 }

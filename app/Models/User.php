@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticableInterface;
+
 /**
  * @property int $usu_id_usu
  * @property int $usu_id_gru
@@ -26,26 +28,19 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticableInterface;
  * @property Grupo $gruGrupo
  * @property PessoaFisica[] $pefPessoaFisicas
  * @property PessoaJuridica[] $pjuPessoaJuridicas
- * @property SituacaoCaptacaoCliente[] $sccSituacaoCaptacaoClientes
  * @property UsuarioMenu[] $umeUsuarioMenus
- * @property BloqueioAcesso[] $blaBloqueioAcessos
- * @property ContratoGestao[] $ccgContratoGestaos
- * @property CaptacaoCliente[] $cclCaptacaoClientes
- * @property CarteitaCobranca[] $ccoCarteitaCobrancas
+ * @property BloqueioAcesso[] $blaBloqueioAcessosas
  */
 class User extends Authenticatable implements AuthenticableInterface
 {
     use HasFactory;
     /**
-     * The table associated with the model.
-     * 
      * @var string
      */
+
     protected $table = 'usu_usuario';
 
     /**
-     * The primary key for the model.
-     * 
      * @var string
      */
     protected $primaryKey = 'usu_id_usu';
@@ -59,23 +54,23 @@ class User extends Authenticatable implements AuthenticableInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function gpeGestaoPessoa()
+    public function gestaoPessoa()
     {
-        return $this->belongsTo('App\GpeGestaoPessoa', 'usu_id_gpe', 'gpe_id_gpe');
+        return $this->belongsTo(GestaoPessoa::class, 'usu_id_gpe', 'gpe_id_gpe');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function gruGrupo()
+    public function grupo()
     {
-        return $this->belongsTo('App\GruGrupo', 'usu_id_gru', 'gru_id_gru');
+        return $this->belongsTo(Grupo::class, 'usu_id_gru', 'gru_id_gru');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function pefPessoaFisicas()
+    public function pessoaFisica()
     {
         return $this->hasMany('App\PefPessoaFisica', 'pef_id_usu', 'usu_id_usu');
     }
@@ -83,7 +78,7 @@ class User extends Authenticatable implements AuthenticableInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function pjuPessoaJuridicas()
+    public function pessoaJuridica()
     {
         return $this->hasMany('App\PjuPessoaJuridica', 'pju_id_usu', 'usu_id_usu');
     }
@@ -91,15 +86,7 @@ class User extends Authenticatable implements AuthenticableInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function sccSituacaoCaptacaoClientes()
-    {
-        return $this->hasMany('App\SccSituacaoCaptacaoCliente', 'scc_id_usu', 'usu_id_usu');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function umeUsuarioMenus()
+    public function usuariMenu()
     {
         return $this->hasMany('App\UmeUsuarioMenu', 'ume_id_usu', 'usu_id_usu');
     }
@@ -107,32 +94,77 @@ class User extends Authenticatable implements AuthenticableInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function blaBloqueioAcessos()
+    public function bloqueioAcesso()
     {
         return $this->hasMany('App\BlaBloqueioAcesso', 'bla_id_usu', 'usu_id_usu');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ccgContratoGestaos()
-    {
-        return $this->hasMany('App\CcgContratoGestao', 'ccg_id_usu', 'usu_id_usu');
+    public function getUsuarios(array $request = []){
+
+        $conditions = [];
+            
+        if(isset($request['usu_nom_usuario']) && !empty($request['usu_nom_usuario'])){
+            $conditions[]= ['usu_nom_usuario', 'LIKE', '%'.$request['usu_nom_usuario'].'%'];
+        }
+
+        if(isset($request['usu_nom_login']) && !empty($request['usu_nom_login'])){
+            $conditions[] = ['usu_nom_login', 'LIKE', '%'.$request['usu_nom_login'].'%'];
+        }
+
+        if(isset($request['grupo_id']) && !empty($request['grupo_id'])){
+            $conditions[] = ['usu_id_gru', '=', $request['grupo_id']];
+        }
+
+        if(isset($request['ativo']) && $request['ativo'] != null){
+            $conditions[] = ['usu_flg_ativo', '=', $request['ativo']];
+        }
+
+        return $this
+            ->with('grupo')
+            ->where($conditions)
+            ->orderBy('usu_id_usu', 'DESC')
+            ->paginate(20);
+    
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cclCaptacaoClientes()
-    {
-        return $this->hasMany('App\CclCaptacaoCliente', 'ccl_id_usu', 'usu_id_usu');
+    public function cadastrarUsuario(array $request = []){
+
+        try{
+            $this->usu_nom_usuario = $request['usu_nom_usuario'];
+            $this->usu_nom_login =$request['usu_nom_login'];
+            $this->usu_flg_ativo = $request['ativo'];
+            $this->usu_num_senha = md5('123456');
+            $this->usu_id_gru = $request['grupo_id'];
+
+            if(!$this->save()){
+                throw new Exception;
+            }
+
+            return $this;
+        }catch(Exception $error){
+            return false;
+        }
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ccoCarteitaCobrancas()
-    {
-        return $this->hasMany('App\CcoCarteitaCobranca', 'cco_id_usu', 'usu_id_usu');
+    public function updateUsuario(User $user, array $request = []){
+
+        try{
+   
+            $user->usu_nom_usuario = $request['usu_nom_usuario'];
+            $user->usu_nom_login = $request['usu_nom_login'];
+            $user->usu_flg_ativo = $request['ativo'];
+            $user->usu_num_senha = md5('123456');
+            $user->usu_id_gru = $request['grupo_id'];
+
+            if(!$user->save()){
+                throw new Exception;
+            }
+
+            return $this;
+
+        }catch(Exception $error){
+            dd($error->getMessage());
+            return false;
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class GrupoRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * @return bool
@@ -16,20 +16,25 @@ class GrupoRequest extends FormRequest
     }
 
     /**
+     * Get the validation rules that apply to the request.
+     *
      * @return array
      */
-    public function rules(): array 
+    public function rules()
     {
         $currentRoute = explode('.', Route::currentRouteName());
 
         switch(end($currentRoute)){
             case 'store': 
                 return [
-                    'gru_nom_grupo' => 'required',
+                    'usu_nom_usuario' => 'required',
+                    'usu_nom_login' => 'required',
+                    'grupo_id' => 'required',
+                    'ativo' => 'required',
                 ];
             case 'update': 
                 return [
-                    'gru_nom_grupo' => 'required',
+                    'usu_nom_login' => 'required',
                 ];
         }
     }

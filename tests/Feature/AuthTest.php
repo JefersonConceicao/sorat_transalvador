@@ -2,11 +2,15 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use App\Models\User;
 
 class AuthTest extends TestCase
 {
+
+    use DatabaseTransactions;
+
     /**
      * @return void
      */

@@ -2054,6 +2054,46 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Logged/Usuarios/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Logged/Usuarios/index.js ***!
+  \***********************************************/
+/***/ (() => {
+
+$(function () {
+  init();
+});
+var init = function init() {
+  $(".btnInativarUsuario").on("click", function (e) {});
+  $(".btnAtivarUsuario").on("click", function (e) {});
+};
+var requestToggleStatusUsuarios = function requestToggleStatusUsuarios() {};
+
+/***/ }),
+
+/***/ "./resources/js/Utils/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/Utils/index.js ***!
+  \*************************************/
+/***/ (() => {
+
+$(function () {
+  init();
+});
+var init = function init() {
+  initSelect2();
+  loadModal();
+};
+var initSelect2 = function initSelect2() {
+  $('.select2').select2({
+    theme: 'classic',
+    width: '100%'
+  });
+};
+var loadModal = function loadModal() {};
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2061,6 +2101,8 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+window.Utils = __webpack_require__(/*! ./Utils */ "./resources/js/Utils/index.js");
+window.Usuarios = __webpack_require__(/*! ./Logged/Usuarios */ "./resources/js/Logged/Usuarios/index.js");
 
 /***/ }),
 
