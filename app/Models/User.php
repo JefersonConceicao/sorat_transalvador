@@ -167,4 +167,9 @@ class User extends Authenticatable implements AuthenticableInterface
             return false;
         }
     }
+
+    public function toggleStatusUsuario(User $user, array $request = []){
+        $user->usu_flg_ativo = isset($request['inativar']) ? 0 : 1; 
+        return $user->save();
+    }
 }

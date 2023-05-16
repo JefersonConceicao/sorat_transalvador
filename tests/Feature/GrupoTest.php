@@ -28,10 +28,10 @@ class GrupoTest extends TestCase
         $response->assertSee('Grupos');
     }   
 
-    public function test_nao_deve_armazenar_grupo_sem_nome(){
+    // public function test_nao_deve_armazenar_grupo_sem_nome(){
          
-        $user = User::factory()->create([
-            'usu_num_senha' => md5('123456')
-        ]);
-    }
+    //     $user = User::factory()->create([
+    //         'usu_num_senha' => md5('123456')
+    //     ]);
+    // }
 }

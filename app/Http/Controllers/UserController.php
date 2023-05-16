@@ -61,6 +61,7 @@ class UserController extends Controller
                 'success' => 'Cadastro realizado com sucesso!'
             ]);
         }
+        
         return redirect()->back()->withInput()->with([
             'error' => 'Não foi possível cadastrar o usuário'
         ]);
@@ -77,11 +78,13 @@ class UserController extends Controller
             'optionsGrupos' => $this->grupo::optionsGrupos()
         ]);
     }
-
+    
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * update
+     *
+     * @param  mixed $user
+     * @param  mixed $request
+     * @return void
      */
     public function update(User $user, UserRequest $request)
     {
@@ -96,19 +99,19 @@ class UserController extends Controller
             'error' => 'Não foi possível atualizar o usuário'
         ]);
     }
-
-    public function toggleStatus(User $user){
-
-
-
-    }
-
+    
     /**
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * toggleStatus
+     *
+     * @param  mixed $user
+     * @param  mixed $request
+     * @return void
      */
-    public function destroy($id)
-    {
-        //
+    public function toggleStatus(User $user, Request $request){
+        $responseUpdateStatus = $user->toggleStatusUsuario($user, $request->all());
+    
+        return response()->json([
+            'ok' => $responseUpdateStatus,  
+        ], 200);
     }
 }

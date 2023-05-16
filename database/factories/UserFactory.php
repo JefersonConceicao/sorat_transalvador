@@ -18,7 +18,7 @@ class UserFactory extends Factory
             'usu_nom_usuario' => $this->faker->name(),
             'usu_nom_login' => $this->faker->name(),
             'usu_flg_ativo' => 1,
-            'usu_id_gru' => 7,
+            'usu_id_gru' => 19,
         ];
     }
 

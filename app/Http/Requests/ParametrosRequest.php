@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class UserRequest extends FormRequest
+class ParametrosRequest extends FormRequest
 {
     /**
      * @return bool
@@ -25,19 +25,18 @@ class UserRequest extends FormRequest
         switch(end($currentRoute)){
             case 'store': 
                 return [
-                    'usu_nom_usuario' => 'required',
-                    'usu_nom_login' => 'required',
-                    'grupo_id' => 'required',
-                    'ativo' => 'required',
+                    'par_nom_parametro' => 'required',
+                    'par_des_retorno' => 'required'
                 ];
-            case 'update': 
+            case 'update':
                 return [
-                    'usu_nom_login' => 'required',
-                ];
+                    'par_nom_parametro' => 'required',
+                    'par_des_retorno' => 'required'
+                ]; 
         }
     }
 
-    public function messages(){
+    public function messages():array{
         return [
             'required' => 'Campo obrigatório'
         ];

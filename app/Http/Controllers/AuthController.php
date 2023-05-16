@@ -26,7 +26,7 @@ class AuthController extends Controller
     public function authenticate(AuthRequest $request){
 
         $credentials = $request->only(['login', 'senha']);
-    
+
         $user = $this->user->where([
             'usu_nom_login' => $credentials['login'],
             'usu_num_senha' => md5($credentials['senha'])

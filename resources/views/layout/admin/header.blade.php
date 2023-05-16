@@ -86,20 +86,13 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="#" class="dropdown-toggle toggle-right" data-toggle="dropdown">
-                        <i class="fa fa-fw ti-view-list black"></i>
-                        <span class="badge badge-pill badge-danger">9</span>
-                    </a>
-                </li>
-
                 <li class="dropdown user user-menu">
                      <a href="#" class="dropdown-toggle padding-user d-block" data-toggle="dropdown">
                         <img src=" {{ asset('clear_theme/img/authors/avatar1.jpg') }}" width="35" class="rounded-circle img-fluid float-left"
                              height="35" alt="User Image">
                         <div class="riot">
                             <div>
-                                {{ Auth::user()->usu_nom_login }}
+                                {{ Auth::user()->usu_nom_usuario }}
                                 <span><i class="fa fa-sort-down"></i></span>
                             </div>
                         </div>

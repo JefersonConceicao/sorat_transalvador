@@ -8,7 +8,6 @@ use App\Models\User;
 
 class AuthTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     /**

@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ParametrosController;
 
 Route::group(['prefix' => 'auth'], function(){
     Route::GET('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -19,7 +21,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::GET('/', [GrupoController::class, 'index'])->name('grupos.index');
         Route::GET('/cadastro', [GrupoController::class, 'create'])->name('grupos.create');
         Route::POST('/salvarGrupo', [GrupoController::class, 'store'])->name('grupos.store');
-        Route::GET('/edit/{grupo}', [GrupoController::class, 'edit'])->name('grupos.edit');
+        Route::GET('/alterar/{grupo}', [GrupoController::class, 'edit'])->name('grupos.edit');
         Route::POST('/update/{grupo}', [GrupoController::class, 'update'])->name('grupos.update');
         Route::GET('/delete/{grupo}', [GrupoController::class, 'destroy'])->name('grupos.delete');
     });
@@ -28,9 +30,25 @@ Route::group(['middleware' => 'auth'], function(){
         Route::GET('/', [UserController::class, 'index'])->name('user.index');
         Route::GET('/cadastro', [UserController::class, 'create'])->name('user.create');
         Route::POST('/salvarUsuario', [UserController::class, 'store'])->name('user.store');
-        Route::GET('/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
+        Route::GET('/alterar/{user}', [UserController::class, 'edit'])->name('user.edit');
         Route::POST('/update/{user}', [UserController::class, 'update'])->name('user.update');
         Route::GET('/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
+        Route::POST('/toggleStatus/{user}', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
+    });
+
+    Route::group(['prefix' => 'menu'], function(){
+        Route::GET('/', [MenuController::class, 'index'])->name('menu.index');
+        Route::GET('/cadastro', [MenuController::class, 'index'])->name('menu.index');
+        Route::GET('/alterar/{menu}', [MenuController::class, 'index'])->name('menu.index');
+    });
+
+    Route::group(['prefix' => 'parametros'], function(){
+        Route::GET('/', [ParametrosController::class, 'index'])->name('parametros.index');
+        Route::GET('/cadastro', [ParametrosController::class, 'create'])->name('parametros.create');
+        Route::POST('/store', [ParametrosController::class, 'store'])->name('parametros.store');
+        Route::GET('/alterar/{parametro}', [ParametrosController::class, 'edit'])->name('parametros.edit');
+        Route::POST('/update/{parametro}', [ParametrosController::class, 'update'])->name('parametros.update');
+        Route::GET('/delete/{parametro}', [ParametrosController::class, 'destroy'])->name('parametros.destroy');
     });
 
     Route::GET('/logout', [AuthController::class, 'logout'])->name('auth.logout');
