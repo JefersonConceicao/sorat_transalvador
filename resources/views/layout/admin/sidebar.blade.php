@@ -7,7 +7,7 @@
                 <li class="active" id="active">
                     <a href="index.html">
                         <i class="menu-icon ti-desktop"></i>
-                        <span class="mm-text ">Dashboard 1</span>
+                        <span class="mm-text">Dashboard 1</span>
                     </a>
                 </li>
                 <li>

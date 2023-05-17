@@ -5,11 +5,11 @@ $(() => {
 })
 
 const init = () => {
+    initFontIcon();
     initSelect2();
     setupAjax();
     loadModal();
 }   
-
 
 const setupAjax = () => {
     $.ajaxSetup({
@@ -22,8 +22,12 @@ const setupAjax = () => {
 const initSelect2 = () => {
     $('.select2').select2({
         theme: 'classic',
-        width: '100%',
+        width: '100%'
     });
+}
+
+const initFontIcon = () => {
+
 }
 
 const loadModal = () => {

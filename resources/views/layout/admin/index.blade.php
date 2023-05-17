@@ -4,6 +4,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('clear_theme/css/custom.css') }}">
     <link href="{{ asset('clear_theme/css/custom_css/dashboard1.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('clear_theme/css/formelements.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('clear_theme/vendors/iCheck/css/all.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('clear_theme/vendors/iconpicker-bootstrap/dist/css/bootstrap-iconpicker.min.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection 
 
@@ -51,6 +55,11 @@
         @routes
         <div id="qn"></div>
         <script src="{{ asset('clear_theme/js/app.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('clear_theme/vendors/bootstrap-fileinput/js/fileinput.min.js')}} " type="text/javascript"></script>
+        <script src="{{ asset('clear_theme/vendors/bootstrap-fileinput/js/theme.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('clear_theme/js/custom_js/form_elements.js') }}"> </script>
+        <script src="{{ asset('clear_theme/vendors/iCheck/js/icheck.js') }}"> </script>
+        <script src="{{ asset('clear_theme/vendors/iconpicker-bootstrap/dist/js/bootstrap-iconpicker.bundle.min.js') }}"> </script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     </body>

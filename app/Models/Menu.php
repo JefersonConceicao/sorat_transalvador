@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
 
 /**
  * @property int $men_id_men
@@ -66,7 +67,7 @@ class Menu extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function controleMenus()
+    public function controleMenu()
     {
         return $this->hasMany(ControleMenu::class, 'com_id_men', 'men_id_men');
     }
@@ -87,13 +88,41 @@ class Menu extends Model
         return $this->hasMany(UsuarioMenu::class, 'ume_id_men', 'men_id_men');
     }
 
-    public function getMenus(array $request = []){
+    public function getControllersRoute(): array
+    {
+        $rotas = Route::getRoutes();
 
+        $nomeRotasController = [];
+        $arrayExcecoesNomeRotas = ['ignition']; 
 
+        foreach($rotas as $rota){
+            //UTILIZA O LIMITADOR . PARA QUEBRA DE STRING, E PEGA O PRIMEIRO INDICE REFERENTE AO CONTROLLER
+            $nomeRota = explode('.', $rota->getName())[0];
+
+            if(empty($nomeRota) || in_array($nomeRota, $arrayExcecoesNomeRotas)){  
+                continue;
+            }
+
+            array_push($nomeRotasController, $nomeRota);
+        }
+
+        return array_values(array_unique($nomeRotasController));
     }
 
-    public function cadastrarMenu(){
 
+    public function getMenus(array $request = []){
+        
+        $conditions = [];
+        $conditions[] = ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')];
+
+        return $this
+            ->where($conditions)
+            ->paginate(20);
+    }
+
+    public function cadastrarMenu(array $request = []){
+
+        dd($request);
 
     }
 

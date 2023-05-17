@@ -1,3 +1,3 @@
 <div class="alert alert-danger">    
-    {{ $slot }}
+    <h4> {{ $slot }} </h4> 
 </div>

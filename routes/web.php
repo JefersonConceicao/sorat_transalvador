@@ -36,12 +36,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::POST('/toggleStatus/{user}', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
     });
 
-    Route::group(['prefix' => 'menu'], function(){
-        Route::GET('/', [MenuController::class, 'index'])->name('menu.index');
-        Route::GET('/cadastro', [MenuController::class, 'index'])->name('menu.index');
-        Route::GET('/alterar/{menu}', [MenuController::class, 'index'])->name('menu.index');
-    });
-
     Route::group(['prefix' => 'parametros'], function(){
         Route::GET('/', [ParametrosController::class, 'index'])->name('parametros.index');
         Route::GET('/cadastro', [ParametrosController::class, 'create'])->name('parametros.create');
@@ -49,6 +43,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::GET('/alterar/{parametro}', [ParametrosController::class, 'edit'])->name('parametros.edit');
         Route::POST('/update/{parametro}', [ParametrosController::class, 'update'])->name('parametros.update');
         Route::GET('/delete/{parametro}', [ParametrosController::class, 'destroy'])->name('parametros.destroy');
+    });
+
+    Route::group(['prefix' => 'menu'], function(){
+        Route::GET('/', [MenuController::class, 'index'])->name('menu.index');
+        Route::GET('/create', [MenuController::class, 'create'])->name('menu.create');
+        Route::POST('/store', [MenuController::class, 'store'])->name('menu.store');
+        Route::GET('/edit/{menu}', [MenuController::class, 'edit'])->name('menu.edit');
+        Route::POST('/update/{menu}', [MenuController::class, 'update'])->name('menu.update');
+        Route::GET('/delete/{menu}', [MenuController::class, 'update'])->name('menu.delete');
     });
 
     Route::GET('/logout', [AuthController::class, 'logout'])->name('auth.logout');

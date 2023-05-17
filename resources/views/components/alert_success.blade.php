@@ -1,1 +1,3 @@
-<div class="alert alert-success"> {{ $slot }} </div>
+<div class="alert alert-success">
+    <h4> {{ $slot }} </h4> 
+</div>

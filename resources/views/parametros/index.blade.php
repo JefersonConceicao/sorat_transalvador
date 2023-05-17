@@ -1,6 +1,5 @@
 @extends('layout.admin.index')
 @section('content-title', 'Parametros')
-
 @section('content-body')
     @if (session('success'))
         <x-alert_success>
@@ -9,7 +8,7 @@
     @endif
 
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-12">
             <div class="card">
                 <form method="GET">
                     <div class="card-header">
@@ -72,7 +71,8 @@
                                             <a href="{{ route('parametros.edit', $dado->par_nom_parametro) }}" class="btn-sm btn btn-primary"> 
                                                 <i class="fa fa-edit"> </i>
                                             </a>
-                                            <a type="button" class="btn btn-danger btn-sm"> 
+                                            
+                                            <a href="{{ route('parametros.destroy', $dado->par_nom_parametro) }}" type="button" class="btn btn-danger btn-sm"> 
                                                 <i class="fa fa-trash"> </i>
                                             </a>    
                                         </td>
@@ -88,5 +88,4 @@
             </div>
         </div>
     </div>
-
 @endsection

@@ -65,8 +65,6 @@ class ParametrosController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Parametro  $parametro
      * @return \Illuminate\Http\Response
@@ -84,7 +82,6 @@ class ParametrosController extends Controller
         return redirect()->back()->withInput()->with([
             'error' => 'Não foi possível atualizar o parametro'
         ]);
-
     }
 
     /**
@@ -93,6 +90,14 @@ class ParametrosController extends Controller
      */
     public function destroy(Parametro $parametro)
     {
-        //
+        if($parametro->delete()){
+            return redirect()->route('parametros.index')->with([
+                'success' => 'Registro excluído com sucesso!'
+            ]);
+        }
+
+        return redirect()->back()->with([
+            'error' => 'Não foi possível excluír o registro'
+        ]);
     }
 }
