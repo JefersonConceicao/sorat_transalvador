@@ -19,8 +19,12 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label> Nome Menu <span class="text-danger"> * </span></label>
-                                    <input type="text" class="form-control" name="men_nom_menu"
-                                        value="{{ old('men_nom_menu') }}" />
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        name="men_nom_menu"
+                                        value="{{ old('men_nom_menu') }}" 
+                                    />
 
                                     <p class="text-danger">
                                         @error('men_nom_menu')
