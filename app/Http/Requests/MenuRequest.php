@@ -26,7 +26,7 @@ class MenuRequest extends FormRequest
             case 'store': 
                 return [
                     'men_nom_menu' => 'required',
-                    'controller_id' => 'required',
+                    'men_nom_controller' => 'required',
                     'nome_action' => 'required'
                 ];
             case 'update': 

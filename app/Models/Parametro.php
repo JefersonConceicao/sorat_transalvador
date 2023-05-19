@@ -35,7 +35,7 @@ class Parametro extends Model
      */
     protected $fillable = ['par_des_retorno'];
 
-    public static function selectNomParametro(string $nomeParametro): string{
+    public static function selectNomParametro(string $nomeParametro){
         
         return self::select('par_des_retorno')
             ->where(['par_nom_parametro' => $nomeParametro])

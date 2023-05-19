@@ -47,6 +47,7 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = ['men_id_men_pai', 'men_id_csi', 'men_nom_menu', 'men_des_menu', 'men_htm_icon', 'men_nom_action', 'men_nom_controller', 'men_flg_menu_guest', 'men_flg_menu_admin', 'men_flg_modulo', 'men_flg_ativo', 'men_num_posicao', 'men_nom_url', 'men_nom_icon', 'men_nom_path', 'men_num_nivel', 'MEN_ID_MIGRACAO', 'MEN_ID_MIGRACAO_PAI'];
+    public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -122,8 +123,31 @@ class Menu extends Model
 
     public function cadastrarMenu(array $request = []){
 
-        dd($request);
+        try{
 
+            $this->men_nom_menu = $request['men_nom_menu'];
+            $this->men_nom_action = $request['nome_action'];
+            $this->men_htm_icon = $request['icon'] ?? null;
+            $this->men_nom_controller = $request['men_nom_controller'];
+            $this->men_flg_menu_guest = $request['flg_menu_modulo'] ?? 0 ;
+            $this->men_flg_menu_admin = $request['flg_menu_visitante'] ?? 0;
+            $this->men_flg_modulo = $request['flg_menu_modulo'] ?? 0;
+            $this->men_flg_ativo = $request['flg_menu_ativo'] ?? 0;
+            $this->men_id_csi = Parametro::selectNomParametro('ID_SISTEMA_SORAT');
+            $this->men_num_posicao = 0;
+
+            if(isset($request['menu_pai_id']) && $request['menu_pai_id'] == 1){
+                $this->men_id_men_pai = $request['menu_pai_id'];
+            }
+
+            if(!$this->save()){
+                throw new Exception();
+            }
+
+            return true;
+        }catch(Exception $error){
+            return false;
+        }
     }
 
     public function updateMenu(){

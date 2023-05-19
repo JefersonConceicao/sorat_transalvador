@@ -20,8 +20,8 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $dados = $this->menu->getMenus();
-        
+        $dados = $this->menu->getMenus($request->all());
+            
         return view('menu.index', [
             'dados' => $dados
         ]);
@@ -44,8 +44,20 @@ class MenuController extends Controller
     public function store(MenuRequest $request)
     {
         $saveMenu = $this->menu->cadastrarMenu($request->all());
+        if($saveMenu){
+            return 
+                redirect()
+                ->route('menu.index')
+                ->with(['success' => 'Registro cadastrado com sucesso']);
+        }
 
-
+        return 
+            redirect()
+            ->back()
+            ->withInput()
+            ->withErrors([
+                'error' => 'Não foi possível cadastrar o menu, tente novamente ou abra um chamado.'
+            ]);
     }
 
     /**
