@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <h3 class="card-title"> Filtro <i class="fa fa-filter"> </i> </h3>
                         <span class="float-right">
-                            <i class="fa fa-fw clickable ti-angle-up"></i>
+                            <i class="fa fa-fw clickable fas fa-arrow-up"></i>
                         </span>
                     </div>
                     <div class="card-body">
@@ -103,6 +103,47 @@
                                 Novo <i class="fa fa-plus-square"> </i>
                             </a>
                         </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th> Nome Menu </th>
+                                <th> Controller </th>
+                                <th> Action </th>
+                                <th> Menu Módulo? </th>
+                                <th> Menu Visitante? </th>
+                                <th> Menu Administrativo? </th>
+                                <th> Ativo? </th>
+                                <th> Menu Pai </th>
+                                <th width="15%" class="text-center"> Ações </th>
+                            </thead>
+                            <tbody>
+                                @foreach($dados as $dado)
+                                    <tr>
+                                        <td> {{  $dado->men_nom_menu ?? "Não informado" }} </td>
+                                        <td> {{  $dado->men_nom_controller ?? "Não informado"}} </td>
+                                        <td> {{  $dado->men_nom_action ?? "Não informado" }} </td>
+                                        <td>     
+                                            <span> 
+                                                @if($dado->men_flg_modulo)
+                                                    <i class='fa fa-check'> </i>
+                                                @else 
+                                                    <i class='fa fa-close'> </i>
+                                                @endif 
+                                            </span>
+                                        <td>    
+                                            <span> 
+                                                @if($dado->men_flg_menu_guest)
+                                                    <i class='fa fa-check'> </i>
+                                                @else 
+                                                    <i class='fa fa-close'> </i>
+                                                @endif 
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

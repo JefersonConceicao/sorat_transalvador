@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Nome Menu <span class="text-danger"> * </span></label>
                                     <input 
@@ -33,63 +33,77 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+
+                            <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Descrição do Menu </label>
                                     <input type="text" class="form-control" name="descricao_menu" />
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            
+                            <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
-                                    <label> Controller </label>
-                                    <select class="form-control select2" name="controller_id">
+                                    <label> Controller  <span class="text-danger"> * </span> </label>
+                                    <select class="form-control select2" name="men_nom_controller">
                                         <option value=""> Selecione </option>
 
                                         @foreach($controllers as $controller)
                                             <option value="{{ $controller}}"> {{ $controller }}</option>
                                         @endforeach
                                     </select>
+
+                                    <p class="text-danger">
+                                        @error('men_nom_controller')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
-                                    <label> Action </label>
+                                    <label> Action <span class="text-danger"> * </span> </label>
                                     <input type="text" class="form-control" name="nome_action" />
+
+                                    <p class="text-danger">
+                                        @error('nome_action')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxModulo" value="menu_modulo">
+                                    <input type="checkbox" id="checkboxModulo" name="flg_menu_modulo">
                                     Menu Módulo
                                 </label>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxVisitante" value="menu_visitante">
+                                    <input type="checkbox" id="checkboxVisitante" value="flg_menu_visitante">
                                     Menu Visitante
                                 </label>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxAdministrativo" value="menu_administrativo">
+                                    <input type="checkbox" id="checkboxAdministrativo" value="flg_menu_admin">
                                     Menu Administrativo
                                 </label>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxAtivo" value="menu_ativo">
+                                    <input type="checkbox" id="checkboxAtivo" value="flg_menu_ativo">
                                     Ativo
                                 </label>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-sm-6">
                                 <div class="form-group">
                                     <label> Icone </label>
                                     <div>
@@ -107,7 +121,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <label> Menu Pai </label>
                                 <select class="form-control select2" name="menu_pai_id">
                                     <option value=""> Selecione </option>
