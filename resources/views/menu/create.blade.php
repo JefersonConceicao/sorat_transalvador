@@ -40,7 +40,7 @@
                                     <input type="text" class="form-control" name="descricao_menu" />
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Controller  <span class="text-danger"> * </span> </label>
@@ -82,21 +82,21 @@
 
                             <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxVisitante" value="flg_menu_visitante">
+                                    <input type="checkbox" id="checkboxVisitante" name="flg_menu_visitante">
                                     Menu Visitante
                                 </label>
                             </div>
 
                             <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxAdministrativo" value="flg_menu_admin">
+                                    <input type="checkbox" id="checkboxAdministrativo" name="flg_menu_admin">
                                     Menu Administrativo
                                 </label>
                             </div>
 
                             <div class="col-md-1 col-sm-4">
                                 <label class="checkbox-inline icheckbox">
-                                    <input type="checkbox" id="checkboxAtivo" value="flg_menu_ativo">
+                                    <input type="checkbox" id="checkboxAtivo" name="flg_menu_ativo">
                                     Ativo
                                 </label>
                             </div>
@@ -124,7 +124,12 @@
                             <div class="col-md-3 col-sm-6">
                                 <label> Menu Pai </label>
                                 <select class="form-control select2" name="menu_pai_id">
+                                    
                                     <option value=""> Selecione </option>
+
+                                    @foreach($optionsMenuPai as $idMenuPai => $menuPai)
+                                        <option value={{ $idMenuPai}}> {{ $menuPai }} </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

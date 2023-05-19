@@ -2147,7 +2147,6 @@ $(function () {
   init();
 });
 var init = function init() {
-  initFontIcon();
   initSelect2();
   setupAjax();
   loadModal();
@@ -2165,7 +2164,6 @@ var initSelect2 = function initSelect2() {
     width: '100%'
   });
 };
-var initFontIcon = function initFontIcon() {};
 var loadModal = function loadModal() {};
 var feedbackSwal = function feedbackSwal(type, message) {
   return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({

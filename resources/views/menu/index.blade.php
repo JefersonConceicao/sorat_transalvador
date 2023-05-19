@@ -80,7 +80,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
                             <div class="col-md-12">
                                 <button class="btn btn-primary float-right">
                                     <i class="fa fa-search"></i> Pesquisar
@@ -110,10 +112,10 @@
                                 <th> Nome Menu </th>
                                 <th> Controller </th>
                                 <th> Action </th>
-                                <th> Menu Módulo? </th>
-                                <th> Menu Visitante? </th>
-                                <th> Menu Administrativo? </th>
-                                <th> Ativo? </th>
+                                <th width="3%"> Menu Módulo? </th>
+                                <th width="3%"> Menu Visitante? </th>
+                                <th width="3%"> Menu Administrativo? </th>
+                                <th width="3%"> Ativo? </th>
                                 <th> Menu Pai </th>
                                 <th width="15%" class="text-center"> Ações </th>
                             </thead>
@@ -123,22 +125,50 @@
                                         <td> {{  $dado->men_nom_menu ?? "Não informado" }} </td>
                                         <td> {{  $dado->men_nom_controller ?? "Não informado"}} </td>
                                         <td> {{  $dado->men_nom_action ?? "Não informado" }} </td>
-                                        <td>     
+                                        <td class="text-center">     
                                             <span> 
                                                 @if($dado->men_flg_modulo)
-                                                    <i class='fa fa-check'> </i>
+                                                <span class="text-success"> <i class='fa fa-check'> </i> </span>
                                                 @else 
-                                                    <i class='fa fa-close'> </i>
+                                                <span class="text-danger"> <i class='fa fa-close'> </i> </span>
                                                 @endif 
                                             </span>
-                                        <td>    
+                                        <td class="text-center">      
                                             <span> 
                                                 @if($dado->men_flg_menu_guest)
-                                                    <i class='fa fa-check'> </i>
+                                                    <span class="text-success"> <i class='fa fa-check'> </i> </span>
                                                 @else 
-                                                    <i class='fa fa-close'> </i>
+                                                    <span class="text-danger"> <i class='fa fa-close'> </i> </span>
                                                 @endif 
                                             </span>
+                                        </td>
+                                        <td class="text-center"> 
+                                            <span> 
+                                                @if($dado->men_flg_menu_admin)
+                                                    <span class="text-success"> <i class='fa fa-check'> </i> </span>
+                                                @else 
+                                                    <span class="text-danger"> <i class='fa fa-close'> </i> </span>
+                                                @endif 
+                                            </span>
+                                        </td>
+                                        <td class="text-center">  
+                                            <span> 
+                                                @if($dado->men_flg_ativo)
+                                                    <span class="text-success"> <i class='fa fa-check'> </i> </span>
+                                                @else 
+                                                    <span class="text-danger"> <i class='fa fa-close'> </i> </span>
+                                                @endif 
+                                            </span>
+                                        </td>
+                                        <td> {{ $dado->menu->men_nom_menu ?? "" }}</td>
+                                        <td width="5%" class="text-center">
+                                            <a href={{ route('menu.edit', $dado->men_id_men) }}
+                                                class="btn btn-primary btn-rounded btn-sm">
+                                                <i class="fa fa-edit"> </i>
+                                            </a>
+                                            <a class="btn btn-danger btn-rounded btn-sm">
+                                                <span class="text-white"> <i class="fa fa-trash"> </i> </span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

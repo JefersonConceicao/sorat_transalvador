@@ -4,19 +4,15 @@
     <section class="sidebar">
         <div id="menu" role="navigation">
             <ul class="navigation">
-                <li class="active" id="active">
-                    <a href="index.html">
-                        <i class="menu-icon ti-desktop"></i>
-                        <span class="mm-text">Dashboard 1</span>
+                @foreach($menus as $menu)
+                <li class="{{ $menu->men_nom_controller.'.'.$menu->men_nom_action == Route::currentRouteName() ? 'active' : '' }}" id="active">
+                    <a href="{{ route(''.$menu->men_nom_controller.'.'.$menu->men_nom_action)}}">
+                        <i class="menu-icon {{ $menu->men_htm_icon }}"></i>
+                        <span class="mm-text"> {{ $menu->men_nom_menu }} </span>
                     </a>
                 </li>
-                <li>
-                    <a href="index2.html">
-                        <i class="menu-icon ti-layout-list-large-image"></i>
-                        <span class="mm-text ">Dashboard 2</span>
-                    </a>
-                </li>
-                <li class="menu-dropdown">
+                @endforeach
+                {{-- <li class="menu-dropdown">
                     <a href="javascript:void(0)">
                         <i class="menu-icon ti-check-box"></i>
                         <span>Forms</span>
@@ -30,7 +26,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
             <!-- / .navigation -->
         </div>
