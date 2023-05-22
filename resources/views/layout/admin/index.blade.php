@@ -52,9 +52,10 @@
                 </section>
             </aside>
         </div>
+     
+        <div id="qn"></div>
 
         @routes
-        <div id="qn"></div>
         <script src="{{ asset('clear_theme/js/app.js') }}" type="text/javascript"></script>
         <script src="{{ asset('clear_theme/vendors/bootstrap-fileinput/js/fileinput.min.js')}} " type="text/javascript"></script>
         <script src="{{ asset('clear_theme/vendors/bootstrap-fileinput/js/theme.js')}}" type="text/javascript"></script>

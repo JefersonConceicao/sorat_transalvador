@@ -160,7 +160,9 @@
                                                 @endif 
                                             </span>
                                         </td>
-                                        <td> {{ $dado->menu->men_nom_menu ?? "" }}</td>
+                                        
+                                        <td> </td>
+
                                         <td width="5%" class="text-center">
                                             <a href={{ route('menu.edit', $dado->men_id_men) }}
                                                 class="btn btn-primary btn-rounded btn-sm">

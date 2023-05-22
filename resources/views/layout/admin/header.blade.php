@@ -7,7 +7,7 @@
 
         <div class="mr-auto">
             <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"> 
-                <i class="fa fa-fw ti-menu"></i>
+                <i class="fa fa-fw fas fa-list"></i>
             </a>
         </div>
 

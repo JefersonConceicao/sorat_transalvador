@@ -26,12 +26,14 @@ class MenuRequest extends FormRequest
             case 'store': 
                 return [
                     'men_nom_menu' => 'required',
-                    'men_nom_controller' => 'required',
-                    'nome_action' => 'required'
+                    'men_nom_controller' => 'sometimes|required',
+                    'nome_action' => 'sometimes|required'
                 ];
             case 'update': 
                 return [
-                    'gru_nom_grupo' => 'required',
+                    'men_nom_menu' => 'required',
+                    'men_nom_controller' => 'sometimes|required',
+                    'nome_action' => 'required'
                 ];
         }
     }

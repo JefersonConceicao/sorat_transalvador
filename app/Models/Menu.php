@@ -54,7 +54,7 @@ class Menu extends Model
      */
     public function menu()
     {
-        return $this->belongsTo(Menu::class, 'men_id_men_pai', 'men_id_men');
+        return $this->hasMany(Menu::class, 'men_id_men_pai', 'men_id_men');
     }
 
     /**
@@ -112,13 +112,15 @@ class Menu extends Model
 
     public function getOptionsMenu($conditions = [])
     {
+        $data = $this->where([['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')]]);
         
-        return
-            $this
-            ->where([['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')]])
-            ->where([$conditions])
-            ->pluck('men_nom_menu', 'men_id_men')
-            ->toArray();
+        if(!empty($conditions)){
+            $data->where([$conditions]);
+        }
+
+        $dados = $data->pluck('men_nom_menu', 'men_id_men')->toArray();
+
+        return $dados;
     }
 
     public static function getMenus(array $request = []){
@@ -126,17 +128,20 @@ class Menu extends Model
         $conditions = [];
         $conditions[] = ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')];
 
+        if(isset($request['without_childrens']) &&  $request['without_childrens'] == true){
+            $conditions[] = ['men_id_men_pai', '=', NULL];
+        }
+
         return self::where($conditions)->with('menu')->paginate(20);
     }
 
     public function cadastrarMenu(array $request = []){
 
         try{
-
             $this->men_nom_menu =       $request['men_nom_menu'];
-            $this->men_nom_action =     $request['nome_action'];
+            $this->men_nom_action =     isset($request['nome_action']) ? $request['nome_action'] : null;
             $this->men_htm_icon =       $request['icon'] ?? null;
-            $this->men_nom_controller = $request['men_nom_controller'];
+            $this->men_nom_controller = isset($request['men_nom_controller']) ? $request['men_nom_controller'] : null;
 
             $this->men_flg_menu_guest = isset($request['flg_menu_visitante']) ? 1 : 0 ;
             $this->men_flg_menu_admin = isset($request['flg_menu_admin']) ? 1 :  0;
@@ -145,7 +150,7 @@ class Menu extends Model
             $this->men_id_men_pai =     isset($request['menu_pai_id']) ? $request['menu_pai_id'] : null;
 
             $this->men_id_csi =         Parametro::selectNomParametro('ID_SISTEMA_SORAT');
-            $this->men_num_posicao =    0;
+            $this->men_num_posicao = 0;
             
             if(isset($request['menu_pai_id']) && $request['menu_pai_id'] == 1){
                 $this->men_id_men_pai = $request['menu_pai_id'];

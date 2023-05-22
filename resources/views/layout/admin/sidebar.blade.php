@@ -4,14 +4,8 @@
     <section class="sidebar">
         <div id="menu" role="navigation">
             <ul class="navigation">
-                @foreach($menus as $menu)
-                <li class="{{ $menu->men_nom_controller.'.'.$menu->men_nom_action == Route::currentRouteName() ? 'active' : '' }}" id="active">
-                    <a href="{{ route(''.$menu->men_nom_controller.'.'.$menu->men_nom_action)}}">
-                        <i class="menu-icon {{ $menu->men_htm_icon }}"></i>
-                        <span class="mm-text"> {{ $menu->men_nom_menu }} </span>
-                    </a>
-                </li>
-                @endforeach
+
+                @include('layout.admin.sidebar_item', ['menus' => $menus])
                 {{-- <li class="menu-dropdown">
                     <a href="javascript:void(0)">
                         <i class="menu-icon ti-check-box"></i>

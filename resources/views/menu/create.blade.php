@@ -19,12 +19,8 @@
                             <div class="col-md-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Nome Menu <span class="text-danger"> * </span></label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        name="men_nom_menu"
-                                        value="{{ old('men_nom_menu') }}" 
-                                    />
+                                    <input type="text" class="form-control" name="men_nom_menu"
+                                        value="{{ old('men_nom_menu') }}" />
 
                                     <p class="text-danger">
                                         @error('men_nom_menu')
@@ -41,14 +37,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2 col-sm-6">
+                            <div class="col-md-2 col-sm-6" id="column_input_controller">
                                 <div class="form-group">
-                                    <label> Controller  <span class="text-danger"> * </span> </label>
+                                    <label> Controller <span class="text-danger"> * </span> </label>
                                     <select class="form-control select2" name="men_nom_controller">
                                         <option value=""> Selecione </option>
 
-                                        @foreach($controllers as $controller)
-                                            <option value="{{ $controller}}"> {{ $controller }}</option>
+                                        @foreach ($controllers as $controller)
+                                            <option value="{{ $controller }}"> {{ $controller }}</option>
                                         @endforeach
                                     </select>
 
@@ -59,7 +55,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-6">
+
+                            <div class="col-md-2 col-sm-6" id="column_input_action">
                                 <div class="form-group">
                                     <label> Action <span class="text-danger"> * </span> </label>
                                     <input type="text" class="form-control" name="nome_action" />
@@ -71,10 +68,18 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <div class="col-md-2 col-sm-6" id="column_url_externa" style="display:none;">
+                                <div class="form-group">
+                                    <label> Url Externa </label>
+                                    <input type="text" class="form-control" name="url_externa" />
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row mb-3">
                             <div class="col-md-2 col-sm-4">
-                                <label class="checkbox-inline icheckbox">
+                                <label class="checkbox-inline">
                                     <input type="checkbox" id="checkboxModulo" name="flg_menu_modulo">
                                     Menu Módulo
                                 </label>
@@ -107,16 +112,9 @@
                                 <div class="form-group">
                                     <label> Icone </label>
                                     <div>
-                                        <button 
-                                            class="btn btn-default btn-block" 
-                                            data-iconset="fontawesome5"
-                                            data-icon="fa fa-search"
-                                            role="iconpicker" 
-                                            data-search="true" 
-                                            data-search-text="Pesquise aqui..."
-                                            data-placement="top"
-                                            name="icon"
-                                        >
+                                        <button class="btn btn-default btn-block" data-iconset="fontawesome5"
+                                            data-icon="fa fa-search" role="iconpicker" data-search="true"
+                                            data-search-text="Pesquise aqui..." data-placement="top" name="icon">
                                         </button>
                                     </div>
                                 </div>
@@ -124,11 +122,11 @@
                             <div class="col-md-3 col-sm-6">
                                 <label> Menu Pai </label>
                                 <select class="form-control select2" name="menu_pai_id">
-                                    
+
                                     <option value=""> Selecione </option>
 
-                                    @foreach($optionsMenuPai as $idMenuPai => $menuPai)
-                                        <option value={{ $idMenuPai}}> {{ $menuPai }} </option>
+                                    @foreach ($optionsMenuPai as $idMenuPai => $menuPai)
+                                        <option value={{ $idMenuPai }}> {{ $menuPai }} </option>
                                     @endforeach
                                 </select>
                             </div>
