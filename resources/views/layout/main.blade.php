@@ -16,6 +16,11 @@
         @yield('admin_assets')
     @endif     
     
+
+    @hasSection('link_only_page')
+        @yield('link_only_page')
+    @endif 
+
 </head>
     @yield('content')
 </body>

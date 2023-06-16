@@ -1,6 +1,6 @@
+
 @extends('layout.admin.index')
 @section('content-title', 'Menu')
-
 @section('content-body')
     @if (session('success'))
         <x-alert_success>
@@ -23,15 +23,28 @@
                             <div class="col-md-3 col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Nome </label>
-                                    <input type="text" class="form-control" name="nom_menu"
-                                        value="{{ old('nom_menu') }}" />
+                                    <input 
+                                        type="text" class="form-control" 
+                                        name="nome_menu"
+                                        value="{{ old('nome_menu') }}"     
+                                    />
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Controller </label>
                                     <select class="form-control select2" name="controller_id">
-                                        <option> Selecione </option>
+                                        <option value=""> Selecione </option>
+
+                                        @foreach($optionsController as $controller)
+                                        
+                                            @if($controller == old('controller_id'))
+                                                <option value="{{ $controller }}" selected> {{ $controller }} </option>
+                                            @else 
+                                                <option value="{{ $controller }}"> {{ $controller }} </option>
+                                            @endif
+
+                                        @endforeach 
                                     </select>
                                 </div>
                             </div>
@@ -44,20 +57,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-lg-2 col-sm-6">
-                                <div class="form-group">
-                                    <label> Menu Módulo? </label>
-                                    <select class="form-control select2" name="menu_modulo">
-                                        <option> Selecione </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 col-lg-2 col-sm-6">
+                            <div class="col-md-2 col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Menu Visitante? </label>
                                     <select class="form-control select2" name="menu_visitante">
-                                        <option> Selecione </option>
+                                        <option value=""> Selecione </option>
+                                        <option value="1" @if(old('menu_visitante') == "1") selected @endif> Sim </option>
+                                        <option value="0" @if(old('menu_visitante') == "0") selected @endif > Não </option>
                                     </select>
                                 </div>
                             </div>
@@ -65,8 +71,10 @@
                             <div class="col-md-3 col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label> Menu Administrativo? </label>
-                                    <select class="form-control select2" name="menu_visitante">
-                                        <option> Selecione </option>
+                                    <select class="form-control select2" name="menu_administrativo">
+                                        <option value=""> Selecione </option>
+                                        <option value="1" @if(old('menu_administrativo') == "1") selected @endif> Sim </option>
+                                        <option value="0" @if(old('menu_administrativo') == "0") selected @endif> Não </option>
                                     </select>
                                 </div>
                             </div>
@@ -75,13 +83,13 @@
                                 <div class="form-group">
                                     <label> Ativo? </label>
                                     <select class="form-control select2" name="ativo">
-                                        <option> Selecione </option>
+                                        <option value=""> Selecione </option>
+                                        <option value="1" @if(old('ativo') == "1") selected @endif> Sim </option>
+                                        <option value="0" @if(old('ativo') == "0") selected @endif> Não </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="btn btn-primary float-right">
@@ -161,7 +169,7 @@
                                             </span>
                                         </td>
                                         
-                                        <td> </td>
+                                        <td> {{ $dado->menuPai->men_nom_menu ?? "" }} </td>
 
                                         <td width="5%" class="text-center">
                                             <a href={{ route('menu.edit', $dado->men_id_men) }}

@@ -112,6 +112,7 @@
                                     <label> Icone </label>
                                     <div>
                                         <button 
+                                            type="button"
                                             class="btn btn-default btn-block" 
                                             data-iconset="fontawesome5"
                                             data-icon="{{ $dadosMenu->men_htm_icon}}"
@@ -131,8 +132,7 @@
                                     <option value=""> Selecione </option>
 
                                     @foreach($optionsMenuPai as $idMenuPai => $menuPai)
-
-                                        @if($idMenuPai == $dadosMenu->men_id_men)
+                                        @if($idMenuPai == $dadosMenu->men_id_men_pai)
                                             <option value={{ $idMenuPai }} selected> {{ $menuPai }} </option>
                                         @endif  
 

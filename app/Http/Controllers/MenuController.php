@@ -19,16 +19,19 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
+        session()->flashInput($request->all());
+
         $dados = $this->menu->getMenus($request->all());
+        $optionsController = $this->menu->getControllersRoute();
 
         return view('menu.index', [
-            'dados' => $dados
+            'dados' => $dados,
+            'optionsController' => $optionsController
         ]);
     }
         
     /**
      * create
-     *
      * @return void
      */
     public function create()
@@ -47,10 +50,7 @@ class MenuController extends Controller
         $saveMenu = $this->menu->cadastrarMenu($request->all());
 
         if($saveMenu){
-            return 
-            redirect()
-            ->route('menu.index')
-            ->with(['success' => 'Registro cadastrado com sucesso']);
+            return redirect()->route('menu.index')->with(['success' => 'Registro cadastrado com sucesso']);
         }
 
         return 
@@ -64,7 +64,6 @@ class MenuController extends Controller
 
     /**
      * edit
-     *
      * @param  mixed $menu
      * @return void
      */
@@ -79,18 +78,28 @@ class MenuController extends Controller
     
     /**
      * update
-     *
      * @param  mixed $menu
      * @return void
      */
-    public function update(Menu $menu, Request $request)
+    public function update(Menu $menu, MenuRequest $request)
     {
-        return view('menu.index');
+        $updateMenu = $this->menu->updateMenu($menu, $request->all());
+        
+        if($updateMenu){
+            return redirect()->route('menu.index')->with(['success' => 'Registro atualizado com sucesso!']);
+        }
+
+        return 
+            redirect()
+            ->back()
+            ->withInput()
+            ->withErrors([
+                'error' => 'Não foi possível cadastrar o menu, tente novamente ou abra um chamado.'
+            ]);
     }
     
     /**
      * destroy
-     *
      * @param  mixed $menu
      * @return void
      */
