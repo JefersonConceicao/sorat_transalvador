@@ -57,6 +57,10 @@ class Menu extends Model
         return $this->hasMany(Menu::class, 'men_id_men_pai', 'men_id_men');
     }
 
+    public function menuPai(){
+        return $this->hasOne(Menu::class, 'men_id_men', 'men_id_men_pai');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -123,16 +127,46 @@ class Menu extends Model
         return $dados;
     }
 
+    public static function getMenusForSidebar()
+    {
+        return self::where([
+            ['men_id_men_pai', '=', NULL],
+            ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')],
+        ])
+        ->with('menu')
+        ->get();
+    }
+
     public static function getMenus(array $request = []){
         
         $conditions = [];
         $conditions[] = ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')];
 
-        if(isset($request['without_childrens']) &&  $request['without_childrens'] == true){
-            $conditions[] = ['men_id_men_pai', '=', NULL];
+        if(isset($request['nome_menu']) && !empty($request['nome_menu'])){
+            $conditions[] = ['men_nom_menu', 'LIKE', '%'.$request['nome_menu'].'%'];
         }
 
-        return self::where($conditions)->with('menu')->paginate(20);
+        if(isset($request['controller_id']) && !empty($request['controller_id'])){
+            $conditions[] = ['men_nom_controller', '=', $request['controller_id']];
+        }
+
+        if(isset($request['nom_action']) && !empty($request['nom_action'])){
+            $conditions[] = ['men_nom_action', 'LIKE', '%'.$request['nom_action'].'%'];
+        }
+
+        if(isset($request['menu_visitante']) && $request['menu_visitante'] != ""){
+            $conditions[] = ['men_flg_menu_guest', '=', $request['menu_visitante']];
+        }
+        
+        if(isset($request['menu_administrativo']) && $request['menu_administrativo'] !== ""){
+            $conditions[] = ['men_flg_menu_admin', '=', $request['menu_administrativo']];
+        }
+
+        if(isset($request['ativo']) && $request['ativo'] !== ""){
+            $conditions[] = ['men_flg_ativo', '=', $request['ativo']];
+        }
+
+        return self::where($conditions)->with('menuPai')->paginate(20);
     }
 
     public function cadastrarMenu(array $request = []){
@@ -182,13 +216,16 @@ class Menu extends Model
 
             $menu->men_id_csi =         Parametro::selectNomParametro('ID_SISTEMA_SORAT');
             $menu->men_num_posicao = 0;
-            $menu->men_id_men_pai = $request['menu_pai_id'] ?? null;
+            
+            if(isset($request['menu_pai_id']) && $request['menu_pai_id'] == 1){
+                $menu->men_id_men_pai = $request['menu_pai_id'];
+            }
 
             if(!$menu->save()){
                 throw new Exception();
             }
-
-            return true;
+            
+            return $menu;
         }catch(\Exception $error){
             return false;
         }

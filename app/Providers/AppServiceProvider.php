@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        View::share('menus', Menu::getMenus(['without_childrens' => true ]));
+
+        $menusSidebar = Menu::getMenusForSidebar();
+        View::share('menus', $menusSidebar);
     }
 }
