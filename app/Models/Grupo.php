@@ -59,9 +59,11 @@ class Grupo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function grupoMenu()
+    public function menus()
     {
-        return $this->hasMany('App\GrmGrupoMenu', 'grm_id_gru', 'gru_id_gru');
+        return $this
+            ->belongsToMany(Menu::class,'grm_grupo_menu', 'grm_id_gru', 'grm_id_men')
+            ->where('men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT'));
     }
 
     public function getGrupos(array $request = []){
@@ -80,3 +82,5 @@ class Grupo extends Model
         return self::pluck('gru_nom_grupo', 'gru_id_gru')->toArray();
     }
 }
+
+

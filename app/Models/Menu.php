@@ -132,6 +132,8 @@ class Menu extends Model
         return self::where([
             ['men_id_men_pai', '=', NULL],
             ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')],
+            ['men_flg_ativo', '=', 1],
+            ['men_flg_menu_admin', '=', 1]
         ])
         ->with('menu')
         ->get();
@@ -229,5 +231,41 @@ class Menu extends Model
         }catch(\Exception $error){
             return false;
         }
+    }
+
+    public function getMenusDesassociados(array $request = [])
+    {   
+        $conditions = [];
+        $conditions[] = ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')];
+
+        if(isset($request['nome_menu']) && !empty($request['nome_menu'])){
+            $conditions[] = ['men_nom_menu','LIKE','%'.$request['nome_menu'].'%'];
+        }
+
+        if(isset($request['nome_action']) && !empty($request['nome_action'])){
+            $conditions[] = ['men_nom_action','LIKE','%'.$request['nome_action'].'%'];
+        }
+
+        if(isset($request['nome_controller']) && !empty($request['nome_controller'])){
+            $conditions[] = ['men_nom_controller','=', $request['nome_controller']];
+        }
+        
+        return $this
+        ->where($conditions)
+        ->get();           
+    }
+
+    public function getIdsMenusAssociados($idGrupo)
+    {
+        $idsGruposAssociados = $this
+            ->join('grm_grupo_menu', 'men_id_men', 'grm_grupo_menu.grm_id_men')
+            ->where([
+                ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')],
+                ['grm_grupo_menu.grm_id_gru', '=', $idGrupo]
+            ])
+            ->pluck('men_id_men')
+            ->toArray();
+
+        return $idsGruposAssociados;
     }
 }

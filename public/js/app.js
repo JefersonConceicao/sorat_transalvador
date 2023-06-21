@@ -2065,6 +2065,7 @@ $(function () {
 });
 var init = function init() {
   $("#checkboxModulo").on("ifChanged", function (e) {
+    console.log("is here");
     if (this.checked) {
       $("#column_input_controller").fadeOut();
       $("#column_input_action").fadeOut();
@@ -2079,6 +2080,7 @@ var init = function init() {
       $("#column_input_action").find('input').removeAttr("disabled");
     }
   });
+  $("#checkboxModulo").iCheck('check');
 };
 
 /***/ }),

@@ -67,7 +67,7 @@
                                                 class="btn btn-primary btn-rounded btn-sm">
                                                 <i class="fa fa-edit"> </i>
                                             </a>
-                                            <a class="btn btn-primary btn-rounded btn-sm">
+                                            <a class="btn btn-primary btn-rounded btn-sm" href="{{ route('grupos.associarMenus', $dado->gru_id_gru) }}">
                                                 <i class="fa fa-desktop"> </i>
                                             </a>
                                             <a href={{ route('grupos.delete', $dado->gru_id_gru) }}

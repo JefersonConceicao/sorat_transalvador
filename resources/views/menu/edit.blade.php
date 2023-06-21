@@ -41,7 +41,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2 col-sm-6 col-lg-4">
+                            <div class="col-md-2 col-sm-6 col-lg-4" id="column_input_controller">
                                 <div class="form-group">
                                     <label> Controller  <span class="text-danger"> * </span> </label>
                                     <select class="form-control select2" name="men_nom_controller">
@@ -63,7 +63,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-6">
+
+                            <div class="col-md-2 col-sm-6" id="column_input_action">
                                 <div class="form-group">
                                     <label> Action <span class="text-danger"> * </span> </label>
                                     <input type="text" class="form-control" name="nome_action" value="{{ $dadosMenu->men_nom_action }}"/>
@@ -126,6 +127,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-md-3 col-sm-6">
                                 <label> Menu Pai </label>
                                 <select class="form-control select2" name="menu_pai_id">
@@ -134,9 +136,9 @@
                                     @foreach($optionsMenuPai as $idMenuPai => $menuPai)
                                         @if($idMenuPai == $dadosMenu->men_id_men_pai)
                                             <option value={{ $idMenuPai }} selected> {{ $menuPai }} </option>
-                                        @endif  
-
-                                        <option value={{ $idMenuPai }}> {{ $menuPai }} </option>
+                                        @else  
+                                            <option value={{ $idMenuPai }}> {{ $menuPai }} </option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

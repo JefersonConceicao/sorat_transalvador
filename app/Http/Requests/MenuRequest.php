@@ -29,12 +29,8 @@ class MenuRequest extends FormRequest
                     'men_nom_controller' => 'sometimes|required',
                     'nome_action' => 'sometimes|required'
                 ];
-            case 'update': 
-                return [
-                    'men_nom_menu' => 'required',
-                    'men_nom_controller' => 'sometimes|required',
-                    'nome_action' => 'required'
-                ];
+            default:
+                return [];
         }
     }
 

@@ -31,7 +31,6 @@ class MenuController extends Controller
     }
         
     /**
-     * create
      * @return void
      */
     public function create()

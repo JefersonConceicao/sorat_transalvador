@@ -1,4 +1,9 @@
 @extends('layout.main')
+
+@section('title')
+    @yield('content-title')
+@endsection 
+
 @section('admin_assets')
     <link type="text/css" rel="stylesheet" href="{{ asset('clear_theme/css/app.css') }} "/>
     <link rel="stylesheet" type="text/css" href="{{ asset('clear_theme/css/custom.css') }}">
@@ -14,7 +19,6 @@
 
 @section('content')
     <body class="skin-default">
-    
         @include('layout.admin.header')
         <div class="wrapper row-offcanvas row-offcanvas-left">
             @include('layout.admin.sidebar')
