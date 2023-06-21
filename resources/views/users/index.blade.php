@@ -81,7 +81,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 text-right mb-2">
-                            <a class="btn btn-sm btn-primary button button-3d" href="{{ route('user.store') }}">
+                            <a class="btn btn-sm btn-primary button button-3d" href="{{ route('user.create') }}">
                                 Novo <i class="fa fa-plus-square"> </i>
                             </a>
                         </div>

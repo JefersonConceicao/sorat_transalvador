@@ -166,8 +166,31 @@ class Menu extends Model
         }
     }
 
-    public function updateMenu(){
+    public function updateMenu(Menu $menu, array $request = []){
 
-        
+        try{
+            $menu->men_nom_menu =       $request['men_nom_menu'];
+            $menu->men_nom_action =     isset($request['nome_action']) ? $request['nome_action'] : null;
+            $menu->men_htm_icon =       $request['icon'] ?? null;
+            $menu->men_nom_controller = isset($request['men_nom_controller']) ? $request['men_nom_controller'] : null;
+
+            $menu->men_flg_menu_guest = isset($request['flg_menu_visitante']) ? 1 : 0 ;
+            $menu->men_flg_menu_admin = isset($request['flg_menu_admin']) ? 1 :  0;
+            $menu->men_flg_modulo =     isset($request['flg_menu_modulo']) ? 1 : 0;
+            $menu->men_flg_ativo =      isset($request['flg_menu_ativo']) ? 1 : 0;
+            $menu->men_id_men_pai =     isset($request['menu_pai_id']) ? $request['menu_pai_id'] : null;
+
+            $menu->men_id_csi =         Parametro::selectNomParametro('ID_SISTEMA_SORAT');
+            $menu->men_num_posicao = 0;
+            $menu->men_id_men_pai = $request['menu_pai_id'] ?? null;
+
+            if(!$menu->save()){
+                throw new Exception();
+            }
+
+            return true;
+        }catch(\Exception $error){
+            return false;
+        }
     }
 }

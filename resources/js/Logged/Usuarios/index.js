@@ -31,22 +31,7 @@ const init = () => {
         e.preventDefault();
         
         let url = route("user.toggleStatus", $(this).attr("id"));
-
-        Swal.fire({
-            title: "Tem certeza?",
-            text: "Não vai ser possível reverter esta ação",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: "Sim, inativar",
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-               requestToggleStatusUsuarios(url, { ativar: true });
-            }
-        });
+        requestToggleStatusUsuarios(url, { ativar: true });    
     });
 };
 

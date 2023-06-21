@@ -83,9 +83,10 @@ class MenuController extends Controller
      * @param  mixed $menu
      * @return void
      */
-    public function update(Menu $menu, Request $request)
+    public function update(Menu $menu, MenuRequest $request)
     {
-        return view('menu.index');
+        $updatedMenu = $this->menu->updateMenu($menu, $request->all());
+        dd($updatedMenu);
     }
     
     /**

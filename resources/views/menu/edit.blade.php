@@ -132,7 +132,7 @@
 
                                     @foreach($optionsMenuPai as $idMenuPai => $menuPai)
 
-                                        @if($idMenuPai == $dadosMenu->men_id_men)
+                                        @if($idMenuPai == $dadosMenu->men_id_men_pai)
                                             <option value={{ $idMenuPai }} selected> {{ $menuPai }} </option>
                                         @endif  
 
