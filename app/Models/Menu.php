@@ -46,7 +46,27 @@ class Menu extends Model
     /**
      * @var array
      */
-    protected $fillable = ['men_id_men_pai', 'men_id_csi', 'men_nom_menu', 'men_des_menu', 'men_htm_icon', 'men_nom_action', 'men_nom_controller', 'men_flg_menu_guest', 'men_flg_menu_admin', 'men_flg_modulo', 'men_flg_ativo', 'men_num_posicao', 'men_nom_url', 'men_nom_icon', 'men_nom_path', 'men_num_nivel', 'MEN_ID_MIGRACAO', 'MEN_ID_MIGRACAO_PAI'];
+    protected $fillable = [
+        'men_id_men_pai', 
+        'men_id_csi', 
+        'men_nom_menu', 
+        'men_des_menu', 
+        'men_htm_icon', 
+        'men_nom_action', 
+        'men_nom_controller', 
+        'men_flg_menu_guest', 
+        'men_flg_menu_admin', 
+        'men_flg_modulo', 
+        'men_flg_ativo', 
+        'men_num_posicao', 
+        'men_nom_url', 
+        'men_nom_icon', 
+        'men_nom_path', 
+        'men_num_nivel', 
+        'MEN_ID_MIGRACAO', 
+        'MEN_ID_MIGRACAO_PAI'
+    ];
+    
     public $timestamps = false;
 
     /**
