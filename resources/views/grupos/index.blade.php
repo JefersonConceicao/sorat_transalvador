@@ -55,7 +55,7 @@
                             <thead>
                                 <th> Nome </th>
                                 <th> Url Padrão </th>
-                                <th width="15%" class="text-center"> Ações </th>
+                                <th width="10%" class="text-center"> Ações </th>
                             </thead>
                             <tbody>
                                 @foreach ($dados as $dado)

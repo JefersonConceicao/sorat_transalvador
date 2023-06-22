@@ -6,6 +6,7 @@
     <link href="{{ asset('clear_theme/vendors/iCheck/css/all.css')}}" rel="stylesheet">
     <link href="{{ asset('clear_theme/vendors/bootstrapvalidator/css/bootstrapValidator.min.css')}}" rel="stylesheet">
     <link href="{{ asset('clear_theme/css/login.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')

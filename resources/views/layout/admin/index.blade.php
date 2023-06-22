@@ -14,6 +14,7 @@
     <link href="{{ asset('clear_theme/vendors/iconpicker-bootstrap/dist/css/bootstrap-iconpicker.min.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <link href="{{ asset('clear_theme/css/alertmessage.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection 
 

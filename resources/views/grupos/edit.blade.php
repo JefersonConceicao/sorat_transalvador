@@ -1,4 +1,5 @@
 @extends('layout.admin.index')
+@section('back-button', route('grupos.index'))
 @section('content-title', 'Cadastrar Grupo')
 
 @section('content-body')

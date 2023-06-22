@@ -272,7 +272,7 @@ class Menu extends Model
         
         return $this
         ->where($conditions)
-        ->get();           
+        ->paginate(20);           
     }
 
     public function getIdsMenusAssociados($idGrupo)

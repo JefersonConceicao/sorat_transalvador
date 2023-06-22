@@ -102,7 +102,7 @@ class GrupoController extends Controller
         ]);
     } 
 
-    public function associarMenus(Grupo $grupo, Request $request)
+    public function viewAssociarMenus(Grupo $grupo, Request $request)
     {
         session()->flashInput($request->all());
 
@@ -114,7 +114,27 @@ class GrupoController extends Controller
         return view('grupos.associar_menus', [
             'menusDesassociados' => $menusDesassociados,
             'idsMenusAssociados' => $idsMenusAssociados,
-            'optionsController' => $optionsController 
+            'optionsController' => $optionsController,
+            'grupo' => $grupo
         ]);
+    }
+    
+    /**
+     *
+     * @param  mixed $grupo
+     * @param  mixed $request
+     * @return void
+     */
+    public function toggleAssociarMenuGrupo(Grupo $grupo, Request $request)
+    {
+        try{
+            $menusByGrupo = $grupo->menus();
+
+            intVal($request->associar) ? $menusByGrupo->attach([$request->idMenu]) : $menusByGrupo->detach([$request->idMenu]);
+
+            return response()->json(['error' => false, 'msg' => 'Associação efetuada'], 200);
+        }catch(\Exception $error){
+            return response()->json(['error' => true, 'msg' => 'Ocorreu um erro interno tente novamente mais tarde'], 500);   
+        }
     }
 }

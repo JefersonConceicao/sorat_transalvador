@@ -24,7 +24,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::GET('/alterar/{grupo}', [GrupoController::class, 'edit'])->name('grupos.edit');
         Route::POST('/update/{grupo}', [GrupoController::class, 'update'])->name('grupos.update');
         Route::GET('/delete/{grupo}', [GrupoController::class, 'destroy'])->name('grupos.delete');
-        Route::GET('/associar-menus/{grupo}', [GrupoController::class, 'associarMenus'])->name('grupos.associarMenus');
+        Route::GET('/associar-menus/{grupo}', [GrupoController::class, 'viewAssociarMenus'])->name('grupos.associarMenus');
+        Route::POST('/toggle-associar-grupos/{grupo}', [GrupoController::class, 'toggleAssociarMenuGrupo'])->name('grupos.toggleAssociarMenuGrupo');
     });
 
     Route::group(['prefix' => 'usuarios'], function(){

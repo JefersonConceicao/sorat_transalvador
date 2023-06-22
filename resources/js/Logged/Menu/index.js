@@ -4,8 +4,6 @@ $(() => {
 
 const init = () => {
     $("#checkboxModulo").on("ifChanged", function(e){     
-        console.log("is here");
-
         if(this.checked){
         
             $("#column_input_controller").fadeOut();
@@ -24,5 +22,5 @@ const init = () => {
         }
     });
 
-    $("#checkboxModulo").iCheck('check');
+    $("#checkboxModulo").iCheck('update');
 }

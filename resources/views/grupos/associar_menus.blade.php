@@ -1,7 +1,20 @@
 @extends('layout.admin.index')
+@section('back-button', route('grupos.index'))
 @section('content-title', "Associar Menu's")
 
 @section('content-body')
+    <div class="row mb-3">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert-message alert-message-default">
+                        <h4> <a href="{{ route('grupos.edit', $grupo->gru_id_gru) }}"> {{ $grupo->gru_nom_grupo }} </a> </h4>
+                        <p> Menu's associados: {{ count($idsMenusAssociados) }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -78,22 +91,25 @@
                                             <td> {{ $menu->men_nom_menu ?? "" }} </td>
                                             <td> {{ $menu->men_nom_controller ?? "(Não definido)" }}</td>
                                             <td> {{ $menu->men_nom_action ?? "(Não definido)" }}</td>
-                                            <td> 
-                                                @if(in_array($menu->men_id_men, $idsMenusAssociados))
-                                                    <label class="checkbox-inline">
-                                                        <input type="checkbox" class="desassociarMenuGrupo" id="{{ $menu->men_id_men }}" checked>
-                                                    </label>
-                                                @else 
-                                                    <label class="checkbox-inline">
-                                                        <input type="checkbox" class="associarMenuGrupo" id="{{ $menu->men_id_men }}">
-                                                    </label>
-                                                @endif 
+                                            <td>   
+                                                <label class="checkbox-inline">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        class="associarMenuGrupo"
+                                                        id_grupo="{{ $grupo->gru_id_gru  }}" 
+                                                        id="{{ $menu->men_id_men }}" 
+                                                        @if(in_array($menu->men_id_men, $idsMenusAssociados))
+                                                            checked
+                                                        @endif 
+                                                    >
+                                                </label>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tr>
                             </tbody>
                         </table>
+                        {{ $menusDesassociados->links() }}    
                     @endif
                 </div>
             </div>
