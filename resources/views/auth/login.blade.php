@@ -1,6 +1,6 @@
 @extends('layout.guest.index')
 @section('content-body')
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-12">
             @error('credenciais_incorretas')
                 <div class="alert alert-danger text-center">

@@ -7,3 +7,4 @@ window.Usuarios = require('./Logged/Usuarios');
 window.Menu = require('./Logged/Menu');
 window.Grupos = require('./Logged/Grupos');
 window.AssociarGrupos = require('./Logged/Grupos/associarMenus');
+window.AssociarMenuUser = require('./Logged/Usuarios/associarMenus');

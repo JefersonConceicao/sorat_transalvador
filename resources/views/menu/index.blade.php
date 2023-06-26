@@ -114,8 +114,13 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p class="text-primary"> Total de registros: <b> {{ $dados->total() }} </b> </p>
+                        </div>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped dataTable">
                             <thead>
                                 <th> Nome Menu </th>
                                 <th> Controller </th>
@@ -176,7 +181,12 @@
                                                 class="btn btn-primary btn-rounded btn-sm">
                                                 <i class="fa fa-edit"> </i>
                                             </a>
-                                            <a class="btn btn-danger btn-rounded btn-sm">
+                                            
+                                            <a 
+                                            href="{{ route('menu.delete', $dado->men_id_men) }}" 
+                                            class="btn btn-danger btn-rounded btn-sm" 
+                                            id="{{ $dado->men_id_men }}"
+                                            >
                                                 <span class="text-white"> <i class="fa fa-trash"> </i> </span>
                                             </a>
                                         </td>

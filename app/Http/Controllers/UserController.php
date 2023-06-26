@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Grupo;
+USE App\Models\Menu;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 
@@ -11,13 +12,16 @@ class UserController extends Controller
 {
     protected $user;
     protected $grupo;
+    protected $menu;
 
     public function __construct(
         User $user,
-        Grupo $grupo
+        Grupo $grupo,
+        Menu $menu
     ) {
         $this->user = $user;
         $this->grupo = $grupo;
+        $this->menu = $menu;
     }
 
     /**
@@ -108,10 +112,42 @@ class UserController extends Controller
      * @return void
      */
     public function toggleStatus(User $user, Request $request){
+
         $responseUpdateStatus = $user->toggleStatusUsuario($user, $request->all());
     
         return response()->json([
             'ok' => $responseUpdateStatus,  
         ], 200);
+    }
+    
+    /**
+     * renderAssociarMenuUsuario
+     *
+     * @param  mixed $user
+     * @param  mixed $request
+     * @return void
+     */
+    public function renderAssociarMenuUsuario(User $user, Request $request)
+    {   
+        session()->flashInput($request->all());
+
+        $optionsController = $this->menu->getControllersRoute();
+        $menusDesassociados = $this->menu->getMenusDesassociados($request->all());
+        $idsMenusAssociadosUsuario = $this->menu->getIdsMenusAssociadosUsuario($user->usu_id_usu);
+
+        return view('users.associar_menus', [
+            'optionsGrupos' => $this->grupo->optionsGrupos(),
+            'optionsController' => $optionsController,
+            'menusDesassociados' => $menusDesassociados,
+            'idsMenusAssociadosUsuario' => $idsMenusAssociadosUsuario,
+            'user' => $user
+        ]);
+    }
+
+    public function toggleAssociacaoMenuUsuario(User $user, Request $request)
+    {
+        $menusUsuario = $user->menu;
+        dd($menusUsuario);
+
     }
 }

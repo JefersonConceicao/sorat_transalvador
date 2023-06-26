@@ -26,18 +26,19 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label> Nome Menu </label>
-                                <input type="text" class="form-control" name="nome_menu" value="{{ old('nome_menu') }}"/>
+                                <input type="text" class="form-control" name="nome_menu"
+                                    value="{{ old('nome_menu') }}" />
                             </div>
-                            
+
                             <div class="col-md-3">
                                 <label> Nome Controller </label>
-                                <select class="form-control select2" name="nome_controller"> 
+                                <select class="form-control select2" name="nome_controller">
                                     <option value=""> Selecione </option>
 
-                                    @foreach($optionsController as $nomeController)
-                                        @if($nomeController == old('nome_controller'))
+                                    @foreach ($optionsController as $nomeController)
+                                        @if ($nomeController == old('nome_controller'))
                                             <option selected value="{{ $nomeController }}"> {{ $nomeController }} </option>
-                                        @else 
+                                        @else
                                             <option value="{{ $nomeController }}"> {{ $nomeController }} </option>
                                         @endif
                                     @endforeach
@@ -46,7 +47,8 @@
 
                             <div class="col-md-3">
                                 <label> Nome Action </label>
-                                <input type="text" class="form-control" name="nome_action" value="{{ old('nome_action') }}"/>
+                                <input type="text" class="form-control" name="nome_action"
+                                    value="{{ old('nome_action') }}" />
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -77,7 +79,7 @@
                     @else
                         <table class="table table-bordered table-hover">
                             <thead>
-                                <tr> 
+                                <tr>
                                     <th> Nome Menu</th>
                                     <th> Nome Controller </th>
                                     <th> Nome Action </th>
@@ -85,31 +87,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr> 
-                                    @foreach($menusDesassociados as $menu)
-                                        <tr>
-                                            <td> {{ $menu->men_nom_menu ?? "" }} </td>
-                                            <td> {{ $menu->men_nom_controller ?? "(Não definido)" }}</td>
-                                            <td> {{ $menu->men_nom_action ?? "(Não definido)" }}</td>
-                                            <td>   
-                                                <label class="checkbox-inline">
-                                                    <input 
-                                                        type="checkbox" 
-                                                        class="associarMenuGrupo"
-                                                        id_grupo="{{ $grupo->gru_id_gru  }}" 
-                                                        id="{{ $menu->men_id_men }}" 
-                                                        @if(in_array($menu->men_id_men, $idsMenusAssociados))
-                                                            checked
-                                                        @endif 
-                                                    >
-                                                </label>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tr>
+                                @foreach ($menusDesassociados as $menu)
+                                    <tr>
+                                        <td> {{ $menu->men_nom_menu ?? '' }} </td>
+                                        <td> {{ $menu->men_nom_controller ?? '(Não definido)' }}</td>
+                                        <td> {{ $menu->men_nom_action ?? '(Não definido)' }}</td>
+                                        <td>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" class="associarMenuGrupo"
+                                                    id_grupo="{{ $grupo->gru_id_gru }}" id="{{ $menu->men_id_men }}"
+                                                    @if (in_array($menu->men_id_men, $idsMenusAssociados)) checked @endif>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        {{ $menusDesassociados->links() }}    
+                        {{ $menusDesassociados->links() }}
                     @endif
                 </div>
             </div>

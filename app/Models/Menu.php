@@ -212,6 +212,10 @@ class Menu extends Model
                 $this->men_id_men_pai = $request['menu_pai_id'];
             }
 
+            if(isset($request['url_externa']) && !empty($request['url_externa'])){
+                $this->men_nom_url = $request['url_externa'];
+            }
+
             if(!$this->save()){
                 throw new Exception();
             }
@@ -241,6 +245,10 @@ class Menu extends Model
             
             if(isset($request['menu_pai_id']) && $request['menu_pai_id'] == 1){
                 $menu->men_id_men_pai = $request['menu_pai_id'];
+            }
+
+            if(isset($request['url_externa']) && !empty($request['url_externa'])){
+                $this->men_nom_url = $request['url_externa'];
             }
 
             if(!$menu->save()){
@@ -275,7 +283,7 @@ class Menu extends Model
         ->paginate(20);           
     }
 
-    public function getIdsMenusAssociados($idGrupo)
+    public function getIdsMenusAssociadosGrupo($idGrupo)
     {
         $idsGruposAssociados = $this
             ->join('grm_grupo_menu', 'men_id_men', 'grm_grupo_menu.grm_id_men')
@@ -287,5 +295,19 @@ class Menu extends Model
             ->toArray();
 
         return $idsGruposAssociados;
+    }
+
+    public function getIdsMenusAssociadosUsuario($idUsuario){
+        
+        $idsMenusUsuario = $this 
+            ->join('ume_usuario_menu', 'men_id_men', 'ume_usuario_menu.ume_id_men')
+            ->where([
+                ['men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT')],
+                ['ume_usuario_menu.ume_id_usu', '=', $idUsuario]
+            ])
+            ->pluck('men_id_men')
+            ->toArray();
+
+        return $idsMenusUsuario;
     }
 }

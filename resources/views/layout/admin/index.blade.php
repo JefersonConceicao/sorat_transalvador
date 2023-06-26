@@ -30,10 +30,10 @@
                             <div class="header-element">
                                 <h3> 
                                     @hasSection('back-button')
-                                    <a href="@yield('back-button')"> 
-                                        <i class="fa fa-arrow-left text-dark" ></i>
-                                    </a>
-                                    &nbsp;
+                                        <a href="@yield('back-button')"> 
+                                            <i class="fa fa-arrow-left text-dark" ></i>
+                                        </a>
+                                        &nbsp;
                                     @endif
 
                                     @yield('content-title')

@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticableInterface;
+use App\Models\Parametro;
 
 /**
  * @property int $usu_id_usu
@@ -83,12 +84,11 @@ class User extends Authenticatable implements AuthenticableInterface
         return $this->hasMany('App\PjuPessoaJuridica', 'pju_id_usu', 'usu_id_usu');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function usuariMenu()
-    {
-        return $this->hasMany('App\UmeUsuarioMenu', 'ume_id_usu', 'usu_id_usu');
+    public function menu()
+    {   
+        return $this
+            ->belongsToMany(Menu::class, 'ume_usuario_menu', 'ume_id_usu', 'ume_id_men')
+            ->where('men_id_csi', '=', Parametro::selectNomParametro('ID_SISTEMA_SORAT'));
     }
 
     /**

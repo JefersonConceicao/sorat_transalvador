@@ -50,6 +50,11 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p class="text-primary"> Total de registros: <b> {{ $dados->total() }} </b> </p>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>

@@ -23,8 +23,7 @@ class GrupoController extends Controller
     public function index(Request $request)
     {
         session()->flashInput($request->input());
-
-        $dados = $this->grupo->getGrupos($request->all())->get();
+        $dados = $this->grupo->getGrupos($request->all())->paginate(20);
 
         return view('grupos.index', [
             'dados' => $dados
@@ -107,7 +106,7 @@ class GrupoController extends Controller
         session()->flashInput($request->all());
 
         $menusDesassociados = $this->Menu->getMenusDesassociados($request->all());
-        $idsMenusAssociados = $this->Menu->getIdsMenusAssociados($grupo->gru_id_gru);
+        $idsMenusAssociados = $this->Menu->getIdsMenusAssociadosGrupo($grupo->gru_id_gru);
 
         $optionsController = $this->Menu->getControllersRoute();
 
@@ -129,7 +128,6 @@ class GrupoController extends Controller
     {
         try{
             $menusByGrupo = $grupo->menus();
-
             intVal($request->associar) ? $menusByGrupo->attach([$request->idMenu]) : $menusByGrupo->detach([$request->idMenu]);
 
             return response()->json(['error' => false, 'msg' => 'Associação efetuada'], 200);

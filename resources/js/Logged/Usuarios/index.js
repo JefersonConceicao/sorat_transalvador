@@ -5,6 +5,7 @@ $(() => {
 });
 
 const init = () => {
+
     $(".btnInativarUsuario").on("click", function (e) {
         e.preventDefault();
         

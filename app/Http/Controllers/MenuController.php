@@ -89,10 +89,7 @@ class MenuController extends Controller
         }
 
         return 
-            redirect()
-            ->back()
-            ->withInput()
-            ->withErrors([
+            redirect()->back()->withInput()->withErrors([
                 'error' => 'Não foi possível cadastrar o menu, tente novamente ou abra um chamado.'
             ]);
     }
@@ -103,7 +100,13 @@ class MenuController extends Controller
      * @return void
      */
     public function destroy(Menu $menu){
+    
+        if($menu->delete()){
+            return redirect()->route('menu.index')->with(['success' => 'Registro excluído com sucesso!']);
+        }
 
-
+        return redirect()->back()->withInput()->withErrors([
+            'error' => 'Não foi possível excluír o registro.'
+        ]);
     }
 }

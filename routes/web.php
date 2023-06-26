@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::POST('/update/{user}', [UserController::class, 'update'])->name('user.update');
         Route::GET('/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
         Route::POST('/toggleStatus/{user}', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
+        Route::GET('/associar-menus/{user}', [UserController::class, 'renderAssociarMenuUsuario'])->name('user.renderAssociarMenus');
+        Route::POST('/toggle-associar-menus/{user}',[UserController::class, 'toggleAssociacaoMenuUsuario'])->name('user.toggleAssociacaoMenuUsuario');
     });
 
     Route::group(['prefix' => 'parametros'], function(){
@@ -53,7 +55,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::POST('/store', [MenuController::class, 'store'])->name('menu.store');
         Route::GET('/edit/{menu}', [MenuController::class, 'edit'])->name('menu.edit');
         Route::POST('/update/{menu}', [MenuController::class, 'update'])->name('menu.update');
-        Route::GET('/delete/{menu}', [MenuController::class, 'update'])->name('menu.delete');
+        Route::GET('/delete/{menu}', [MenuController::class, 'destroy'])->name('menu.delete');
     });
 
     Route::GET('/logout', [AuthController::class, 'logout'])->name('auth.logout');

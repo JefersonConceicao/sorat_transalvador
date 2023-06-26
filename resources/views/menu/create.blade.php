@@ -81,7 +81,7 @@
                             <div class="col-md-2 col-sm-4">
                                 <label class="checkbox-inline">
                                     <input type="checkbox" id="checkboxModulo" name="flg_menu_modulo">
-                                    Menu Módulo
+                                    Link Externo
                                 </label>
                             </div>
 

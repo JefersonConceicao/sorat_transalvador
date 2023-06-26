@@ -13,9 +13,9 @@
     <body id="sign-in">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-10 col-sm-8 m-auto login-form">
+                <div class="col-lg-6 col-10 col-sm-8 m-auto login-form card-guest-form">
                     <h2 class="text-center logo_h2">
-                        <img src="{{ asset('clear_theme/img/pages/clear_black.png') }}" alt="Logo">
+                        <img src="{{ asset('assets/img/transalvador-png.png') }}" alt="Logo">
                     </h2>
                     <div class="card-body">
                         @yield('content-body')

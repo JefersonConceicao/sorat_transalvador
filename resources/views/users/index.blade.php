@@ -2,7 +2,7 @@
 @section('content-title', 'Usuários')
 
 @section('content-body')
-    
+
     @if (session('success'))
         <x-alert_success>
             {{ session('success') }}
@@ -82,8 +82,13 @@
                     <div class="row">
                         <div class="col-12 text-right mb-2">
                             <a class="btn btn-sm btn-primary button button-3d" href="{{ route('user.create') }}">
-                                Novo <i class="fa fa-plus-square"> </i>
+                                Novo Usuário <i class="fa fa-plus-square"> </i>
                             </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p class="text-primary"> Total de registros: <b> {{ $dados->total() }} </b> </p>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -110,13 +115,22 @@
                                         </td>
                                         
                                         <td align="center">
-                                            <a href={{ route('user.edit', $dado->usu_id_usu) }}
-                                                class="btn btn-primary btn-rounded btn-sm">
+                                            <a 
+                                               href={{ route('user.edit', $dado->usu_id_usu) }}
+                                               class="btn btn-primary btn-rounded btn-sm"
+                                               title="Editar Usuário"
+                                            >
                                                 <i class="fa fa-edit"> </i>
                                             </a>
-                                            <a class="btn btn-warning btn-rounded btn-sm">
+
+                                            <a 
+                                            class="btn btn-warning btn-rounded btn-sm" 
+                                            href="{{ route('user.renderAssociarMenus', $dado->usu_id_usu) }}"
+                                            title="Associar Menus ao Usuário"
+                                            >
                                                 <i class="fa fa-desktop"> </i>
                                             </a>
+
                                             @if($dado->usu_flg_ativo)
                                                 <a class="btn btn-danger btn-rounded btn-sm btnInativarUsuario" id="{{ $dado->usu_id_usu }}">
                                                     <i class="fa fa-close"> </i>

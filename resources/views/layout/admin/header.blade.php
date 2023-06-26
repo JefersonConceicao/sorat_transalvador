@@ -1,8 +1,7 @@
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="index.html" class="logo">
-            <!-- Add the class icon to your logo image or logo icon to add the marginin -->
-            <img src="{{ asset('clear_theme/img/logo_white.png') }}" alt="logo"/>
+            <img src="{{ asset('assets/img/logo_transalvador_branco.png') }}" alt="logo"/>
         </a>
 
         <div class="mr-auto">
